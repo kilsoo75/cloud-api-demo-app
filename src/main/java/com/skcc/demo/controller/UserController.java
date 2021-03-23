@@ -1,5 +1,8 @@
 package com.skcc.demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -49,5 +52,21 @@ public class UserController {
 		logger.debug("User is {}", userVo);
 
 		return ResponseEntity.ok(userVo);
+	}
+	
+	@GetMapping
+	public ResponseEntity<?> getUsers(HttpSession session) {
+
+		List<UserVo> list = new ArrayList<UserVo>();
+		
+		for (int i = 1; i < 5; i++) {
+			UserVo userVo = new UserVo();
+			userVo.setId(i);
+			userVo.setName("Cloud Application Demo");
+			list.add(userVo);
+			logger.debug("User is {}", userVo);
+		}
+		
+		return ResponseEntity.ok(list);
 	}
 }
